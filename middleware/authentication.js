@@ -3,23 +3,28 @@ const	JWT			= require('jsonwebtoken'),
 
 function authentication() {}
 
-authentication.prototype.authenticate	= async (request, response, next) => {
+authentication.prototype.authenticate	= async (request, response, next, level="basic") => {
 	try {
 		let token	= request.headers["authorization"];
 		if (token) {
 			let type	= token.slice(0, token.indexOf(" "));
 			token		= token.slice(token.indexOf(" ") + 1);
-
+			
 			if (type.includes("Bearer")) {
 				try {
 					JWT.verify(token, variables.security.secretKey);
+					response.locals.user	= JWT.decode(token, variables.security.secretKey)['client_id'];
 				} catch (error) {
 					response.status(403).send({
 						error: "access_denied"
 					});
 					return;
 				}
-				next();
+				if (level == "basic") {
+					next();
+				} else {
+
+				}
 			} else if (type.includes("Facebook")) { // TODO: Implementar validação de token com API do Facebook
 				response.status(400).send({
 					error: "invalid_scope"
@@ -59,6 +64,7 @@ authentication.prototype.getToken	= (request, response) => {
 						}, variables.security.secretKey),
 						"token_type": "bearer"
 					});
+					return;
 					break;
 				default:
 					response.status(400).send({
