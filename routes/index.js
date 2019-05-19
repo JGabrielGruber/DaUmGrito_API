@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const	router	= (require('express')).Router(),
+		auth	= new (require('../middleware/authentication'))();
 
-router.get('/', function(req, res, next) {
-  res.send("{}");
-});
+router.post('/oauth/token', auth.getToken);
+router.get('/', auth.authenticate, (req, res) => {
+	res.send('asdlkasd');
+})
 
 module.exports = router;
