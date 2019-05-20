@@ -1,7 +1,7 @@
 const	router	= (require('express')).Router(),
 		auth	= new (require('../lib/authentication'))();
 
-router.post('/oauth/token', auth.getToken);
+router.post('/api/oauth/token', auth.getToken);
 
 router.get('/',
 	(request, response, next) => {

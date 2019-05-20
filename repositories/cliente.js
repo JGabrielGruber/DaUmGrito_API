@@ -35,7 +35,7 @@ class Cliente {
 	}
 
 	async getByCPF(cpf) {
-		return await this.base._model.findOne({ cpf: cpf }, this.projection);
+		return await this.base._model.findOne({ cpf: cpf });
 	}
 
 	async create(data) {
