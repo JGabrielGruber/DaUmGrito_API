@@ -1,10 +1,11 @@
 'use strict'
 
-const mongoose	= require('../bin/db/auth');
+const mongoose		= require('mongoose');
+const mongoose_auth	= require('../bin/db/auth');
 
 const Auth	= new mongoose.Schema({
 	client_id:	{
-		type:		String,
+		type:		Number,
 		required:	true,
 		trim:		true,
 		index:		true
@@ -19,4 +20,4 @@ const Auth	= new mongoose.Schema({
 	}
 });
 
-module.exports	= mongoose.model('Auth', Auth);
+module.exports	= mongoose_auth.model('Auth', Auth);
