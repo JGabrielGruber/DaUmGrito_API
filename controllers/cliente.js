@@ -1,8 +1,9 @@
 'use strict'
 
+require('../models/cliente');
+
 const	repository	= new (require('../repositories/cliente'))(),
 		controller	= require('../base/controller'),
-		variables	= require('../bin/config/variables'),
 		auth		= new (require('../lib/authentication'))();
 
 function cliente() {}
