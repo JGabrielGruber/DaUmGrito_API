@@ -4,7 +4,8 @@ const	express			= require('express'),
 		logger			= require('morgan');
 
 const	indexRouter		= require('./routes/index'),
-		clienteRouter	= require('./routes/cliente');
+		clienteRouter	= require('./routes/cliente'),
+		chamadoRouter	= require('./routes/chamado');
 
 const	app	= express();
 
@@ -16,5 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/clientes', clienteRouter);
+app.use('/api/chamados', chamadoRouter);
 
 module.exports = app;
