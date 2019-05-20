@@ -18,8 +18,6 @@ chamado.prototype.getById	= async (request, response) => {
 
 chamado.prototype.post		= async (request, response) => {
 	request.body["cliente"]	= await rep_cli.getByCPF(response.locals.user);
-	console.log(request.body);
-	
 	controller.post(repository, request, response);
 }
 
