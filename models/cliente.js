@@ -69,8 +69,7 @@ const Cliente	= new mongoose.Schema({
 Cliente.pre('save', next => {
 	if (!this.timestamp)
 		this.timestamp = new Date()
-	if (!this.timeupdate)
-		this.timeupdate = new Date()
+	this.timeupdate = new Date()
 	next()
 });
 
