@@ -1,6 +1,8 @@
-const	mongoose	= require('mongoose'),
+'use strict'
+
+const	mongoose_auth	= require('mongoose'),
 		variables	= require('../config/variables');
 
-mongoose.connect(variables.database.connection_auth, { useCreateIndex: true, useNewUrlParser: true });
+mongoose_auth.connect(variables.database.connection_auth, { useCreateIndex: true, useNewUrlParser: true });
 
-module.exports = exports = mongoose;
+module.exports = exports = mongoose_auth;

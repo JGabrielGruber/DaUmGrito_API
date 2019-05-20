@@ -1,6 +1,8 @@
-const	mongoose	= require('mongoose'),
-		variables	= require('../config/variables');
+'use strict'
 
-mongoose.connect(variables.database.connection_app, { useCreateIndex: true, useNewUrlParser: true });
+const	mongoose_app	= require('mongoose'),
+		variables		= require('../config/variables');
 
-module.exports = exports = mongoose;
+mongoose_app.connect(variables.database.connection_app, { useCreateIndex: true, useNewUrlParser: true });
+
+module.exports = exports = mongoose_app;
