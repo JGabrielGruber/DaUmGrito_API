@@ -1,6 +1,6 @@
 {
   "name": "daumgrito-api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -12,5 +12,24 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.9",
     "morgan": "~1.9.1"
-  }
+  },
+  "description": "API do projeto Dá Um Grito, feito como forma de avaliação para a UNC",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JGabrielGruber/DaUmGrito_API.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "JGabriel Gruber",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/JGabrielGruber/DaUmGrito_API/issues"
+  },
+  "homepage": "https://github.com/JGabrielGruber/DaUmGrito_API#readme"
 }
