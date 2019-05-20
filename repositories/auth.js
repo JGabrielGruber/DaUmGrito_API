@@ -1,11 +1,13 @@
+'use strict'
+
 require('../models/auth');
 
-const mongoose = require('../bin/db/app');
+const mongoose_auth = require('../bin/db/auth');
 
 class Auth {
 	
 	constructor() {
-		this._model = mongoose.model('Auth');
+		this._model = mongoose_auth.model('Auth');
 	}
 
 	async getAll() {
@@ -14,6 +16,10 @@ class Auth {
 
 	async getById(id) {
 		return await this._model.findById(id);
+	}
+
+	async getByCID(cid) {
+		return await this._model.findOne({ client_id: cid });
 	}
 
 	async create(data) {
