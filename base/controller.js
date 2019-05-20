@@ -16,6 +16,7 @@ exports.getById	= async(repository, request, response) => {
 		let id = request.params.id;
 		if (id) {
 			response.status(200).send(await repository.getById(id));
+			return;
 		} else {
 			response.status(400).send({
 				error: "invalid_request"
@@ -31,16 +32,10 @@ exports.getById	= async(repository, request, response) => {
 	}
 }
 
-exports.post	= async(repository, validationContract, request, response) => {
+exports.post	= async(repository, request, response) => {
 	try {
-		if (!validationContract.isValid()) {
-			response.status(400).send({
-				error: "invalid_request",
-				validation: validationContract.errors()
-			}).end();
-			return;
-		}
 		response.status(201).send(await repository.create(request.body));
+		return;
 	} catch (error) {
 		console.error(error);
 		response.status(500).send({
@@ -50,16 +45,10 @@ exports.post	= async(repository, validationContract, request, response) => {
 	}
 }
 
-exports.put	= async(repository, validationContract, request, response) => {
+exports.put	= async(repository, request, response) => {
 	try {
-		if (!validationContract.isValid()) {
-			response.status(400).send({
-				error: "invalid_request",
-				validation: validationContract.errors()
-			}).end();
-			return;
-		}
-		response.status(202).send(await repository.update(request.params.id, request.body));
+		response.status(201).send(await repository.update(request.params.id, request.body));
+		return;
 	} catch (error) {
 		console.error(error);
 		response.status(500).send({
@@ -76,6 +65,7 @@ exports.delete	= async(repository, request, response) => {
 		if (id) {
 			await repository.delete(id);
 			response.status(200);
+			return;
 		} else {
 			response.status(400).send({
 				error: "invalid_request"

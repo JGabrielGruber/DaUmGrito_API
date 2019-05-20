@@ -1,11 +1,11 @@
 'use strict'
 
-const mongoose = require('../bin/db/app');
+const mongoose_app = require('../bin/db/app');
 
 class Repository {
 	
 	constructor(model) {
-		this._model = mongoose.model(model);
+		this._model = mongoose_app.model(model);
 	}
 
 	async getAll() {
