@@ -1,6 +1,5 @@
 const	router	= (require('express')).Router(),
-		auth	= new (require('../lib/authentication'))(),
-		ctrl	= new (require('../controllers/cliente'))();
+		auth	= new (require('../lib/authentication'))();
 
 router.post('/oauth/token', auth.getToken);
 
@@ -9,11 +8,8 @@ router.get('/',
 		auth.authenticate(request, response, next, "basic");
 	},
 	(request, response) => {
-		response.send('asdlkasd');
+		response.send('Nice');
 	}
 );
-
-router.get('/clientes', ctrl.get);
-router.post('/clientes', ctrl.post)
 
 module.exports = router;
