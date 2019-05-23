@@ -2,7 +2,7 @@
 
 require('../models/auth');
 
-const mongoose_auth = require('../bin/db/auth');
+const mongoose_auth = require('../bin/db/app');
 
 class Auth {
 	

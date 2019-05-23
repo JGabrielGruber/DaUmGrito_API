@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose		= require('mongoose');
-const mongoose_auth	= require('../bin/db/auth');
+const mongoose_auth	= require('../bin/db/app');
 
 const Auth	= new mongoose.Schema({
 	client_id:	{
