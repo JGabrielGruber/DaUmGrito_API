@@ -52,6 +52,9 @@ const Cliente	= new mongoose.Schema({
 			type:	Number
 		}
 	},
+	foto: {
+		type: String
+	},
 	notificacoes:	{
 		type: Array ,
 		default: []
