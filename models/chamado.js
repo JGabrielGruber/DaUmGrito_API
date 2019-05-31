@@ -31,13 +31,23 @@ const Chamado	= new mongoose.Schema({
 		required:	true
 	},
 	localizacao:	{
-		type:		String,
-		required:	true
+		latitude:	{
+			type:		Number,
+			required:	true
+		},
+		longitude:	{
+			type:		Number,
+			required:	true
+		}	
 	},
 	foto:			{
 		type:		String
 	},
 	resolucoes:		[],
+	status:		{
+		type:	String,
+		default: "Novo"
+	},
 	timestamp:	{
 		type: Date,
 		default: Date.now
