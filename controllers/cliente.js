@@ -18,12 +18,17 @@ cliente.prototype.getById = async (request, response) => {
 
 cliente.prototype.post = async (request, response) => {
 	let data	= request.body;
-	
+
 	if (!(await repository.isUnique(data.cpf, data.contato.email_um))) {
 		
 		request.body.hash = await auth.newAuth(data.cpf, data.hash, "cliente");
 		
 		controller.post(repository, request, response);
+	} else {
+		response.status(409).send({
+			error: "client_already_exist"
+		});
+		return;
 	}
 }
 
