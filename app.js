@@ -1,7 +1,8 @@
 const	express			= require('express'),
 		path			= require('path'),
 		cookieParser	= require('cookie-parser'),
-		logger			= require('morgan');
+		logger			= require('morgan'),
+		cors			= require('cors');
 
 const	indexRouter		= require('./routes/index'),
 		clienteRouter	= require('./routes/cliente'),
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({credentials: true, origin: 'http://localhost'}));
 
 app.use('/', indexRouter);
 app.use('/api/clientes', clienteRouter);
