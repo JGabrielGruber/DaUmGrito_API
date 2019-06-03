@@ -8,6 +8,8 @@ router.get('/', auth.authenticate, controller.get);
 
 router.get('/:id', auth.authenticate, controller.getById);
 
+router.get('/cliente/:cpf', auth.authenticate, controller.getByCPF);
+
 router.post('/', 
 	(request, response, next) => {
 		auth.authenticate(request, response, next, "cliente");

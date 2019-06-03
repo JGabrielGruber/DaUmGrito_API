@@ -18,6 +18,10 @@ class Chamado {
 		return await this.base._model.findById(id);
 	}
 
+	async getByCPF(cpf) {
+		return await this.base._model.find({ "cliente.cpf": cpf });
+	}
+
 	async create(data) {
 		return await this.base.create(data);
 	}
