@@ -8,6 +8,7 @@ class Chamado {
 	
 	constructor() {
 		this.base = new Base('Chamado')
+		this.projection = '_id cliente titulo descricao localizacao timestamp timeupdate'
 	}
 
 	async getAll() {
@@ -19,7 +20,7 @@ class Chamado {
 	}
 
 	async getByCPF(cpf) {
-		return await this.base._model.find({ "cliente.cpf": cpf });
+		return await this.base._model.find({ "cliente.cpf": cpf }, this.projection);
 	}
 
 	async create(data) {
