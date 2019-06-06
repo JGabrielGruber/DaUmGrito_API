@@ -12,7 +12,7 @@ class Chamado {
 	}
 
 	async getAll() {
-		return await this.base._model.find({});
+		return await this.base._model.find({}, this.projection);
 	}
 
 	async getById(id) {
