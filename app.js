@@ -6,7 +6,8 @@ const	express			= require('express'),
 
 const	indexRouter		= require('./routes/index'),
 		clienteRouter	= require('./routes/cliente'),
-		chamadoRouter	= require('./routes/chamado');
+		chamadoRouter	= require('./routes/chamado'),
+		empresaRouter	= require('./routes/empresa');
 
 const	app	= express();
 
@@ -20,5 +21,6 @@ app.use(cors({credentials: true, origin: ['http://localhost', 'http://localhost:
 app.use('/', indexRouter);
 app.use('/api/clientes', clienteRouter);
 app.use('/api/chamados', chamadoRouter);
+app.use('/api/empresas', empresaRouter);
 
 module.exports = app;
