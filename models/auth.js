@@ -5,7 +5,7 @@ const mongoose_auth	= require('../bin/db/app');
 
 const Auth	= new mongoose.Schema({
 	client_id:	{
-		type:		Number,
+		type:		String,
 		required:	true,
 		trim:		true,
 		index:		true
