@@ -35,7 +35,7 @@ class Agente {
 	}
 
 	async getByCPF(cpf) {
-		return await this.base._model.findOne({ cpf: cpf }, this.projection);
+		return await this.base._model.findOne({ cpf: cpf }, "_id");
 	}
 
 	async create(data) {

@@ -17,6 +17,27 @@ agente.prototype.getById = async (request, response) => {
 	controller.getById(repository, request, response);
 }
 
+agente.prototype.getByCPF = async (request, response) => {
+	try {
+		let cpf = request.params.cpf;
+		if (cpf) {
+			response.status(200).send(await repository.getByCPF(cpf));
+			return;
+		} else {
+			response.status(400).send({
+				error: "invalid_request"
+			});
+			return;
+		}
+	} catch (error) {
+		console.error(error);
+		response.status(500).send({
+			error: "server_error"
+		});
+		return;
+	}
+}
+
 agente.prototype.post = async (request, response) => {
 	let data	= request.body;
 
