@@ -20,6 +20,14 @@ class Repository {
 		return await (new this._model(data)).save();
 	}
 
+	async preCreate(data) {
+		return await new this._model(data);
+	}
+
+	async confirm(object) {
+		return await object.save();
+	}
+
 	async update(id, data) {
 		await this._model.findByIdAndUpdate(id, { $set : data });
 		return await this._model.findById(id);
