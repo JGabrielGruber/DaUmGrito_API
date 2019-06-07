@@ -7,7 +7,7 @@ const	controller	= new (require('../controllers/agente'))(),
 
 router.get('/', auth.authenticate, controller.get);
 
-router.get('/:cpf', auth.authenticate, repository.getByCPF);
+router.get('/:cpf', repository.getByCPF);
 
 router.get('/:id', auth.authenticate, controller.getById);
 
