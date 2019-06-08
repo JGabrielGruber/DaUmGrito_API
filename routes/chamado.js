@@ -25,4 +25,19 @@ router.delete('/:id',
 		auth.authenticate(request, response, next, "cliente");
 	}, controller.delete);
 
+router.post('/:id/responsavel',
+	(request, response, next) => {
+		auth.authenticate(request, response, next, "agente");
+	}, controller.postResponsavel);
+
+router.put('/:id/responsavel',
+	(request, response, next) => {
+		auth.authenticate(request, response, next, "empresa");
+	}, controller.putResponsavel);
+
+router.put('/:id/status',
+	(request, response, next) => {
+		auth.authenticate(request, response, next, "agente");
+	}, controller.putStatus);
+
 module.exports	= router;

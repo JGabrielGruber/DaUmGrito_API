@@ -4,7 +4,8 @@ require('../models/chamado');
 
 const	repository	= new (require('../repositories/chamado'))(),
 		controller	= require('../base/controller'),
-		rep_cli		= new (require('../repositories/cliente'))();
+		rep_cli		= new (require('../repositories/cliente'))(),
+		rep_age		= new (require('../repositories/agente'))();
 
 function chamado() {}
 
@@ -49,5 +50,96 @@ chamado.prototype.put		= async (request, response) => {
 chamado.prototype.delete	= async (request, response) => {
 	controller.delete(repository, request, response);
 }
+
+chamado.prototype.postResponsavel	= async (request, response) => {
+	try {
+		let id	= request.params.id;
+		if (id) {
+			let data	= await repository.getById(id);
+			if (data && !data.responsavel) {
+				data["responsavel"]	= await rep_age.getById(response.locals.user);
+				response.status(200).send(await repository.update(id, data));
+				return;
+			} else {
+				response.status(400).send({
+					error: "invalid_request"
+				});
+				return;
+			}
+		} else {
+			response.status(400).send({
+				error: "invalid_request"
+			});
+			return;
+		}
+	} catch (error) {
+		console.error(error);
+		response.status(500).send({
+			error: "server_error"
+		});
+		return;
+	}
+}
+
+chamado.prototype.putResponsavel	= async (request, response) => {
+	try {
+		let id = request.params.id;
+		if (id) {
+			let data	= await repository.getById(id);
+			if (data) {
+				data['responsavel']	= await rep_age.getById(request.body._id);
+				response.status(200).send(await repository.update(id, data));
+				return;
+			} else {
+				response.status(404).send({
+					error: "not_found"
+				});
+				return;
+			}
+		} else {
+			response.status(400).send({
+				error: "invalid_request"
+			});
+			return;
+		}
+	} catch (error) {
+		console.error(error);
+		response.status(500).send({
+			error: "server_error"
+		});
+		return;
+	}
+}
+
+chamado.prototype.putStatus			= async (request, response) => {
+	try {
+		let	id = request.params.id;
+		if (id) {
+			let data	= await repository.getById(id);
+			if (data) {
+				data['status']	= request.body.status;
+				response.status(200).send(await repository.update(id, data));
+				return;
+			} else {
+				response.status(404).send({
+					error: "not_found"
+				});
+				return;
+			}
+		} else {
+			response.status(400).send({
+				error: "invalid_request"
+			});
+			return;
+		}
+	} catch (error) {
+		console.error(error);
+		response.status(500).send({
+			error: "server_error"
+		});
+		return;
+	}
+}
+
 
 module.exports	= chamado;
