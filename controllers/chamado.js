@@ -100,6 +100,7 @@ chamado.prototype.postResponsavel	= async (request, response) => {
 			let data	= await repository.getById(id);
 			if (data && !data.responsavel.cpf) {
 				data["responsavel"]	= await rep_age.getById(response.locals.user);
+				data["status"]		= "Sob Atendimento";
 				response.status(200).send(await repository.update(id, data));
 				return;
 			} else {
