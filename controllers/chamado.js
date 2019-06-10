@@ -38,6 +38,48 @@ chamado.prototype.getByCPF	= async (request, response) => {
 	}
 }
 
+chamado.prototype.getByCPFAgente	= async (request, response) => {
+	try {
+		let cpf = request.params.cpf;
+		if (cpf) {
+			response.status(200).send(await repository.getByCPFAgente(cpf));
+			return;
+		} else {
+			response.status(400).send({
+				error: "invalid_request"
+			});
+			return;
+		}
+	} catch (error) {
+		console.error(error);
+		response.status(500).send({
+			error: "server_error"
+		});
+		return;
+	}
+}
+
+chamado.prototype.getByCNPJ	= async (request, response) => {
+	try {
+		let cnpj = request.params.cnpj;
+		if (cnpj) {
+			response.status(200).send(await repository.getByCNPJ(cnpj));
+			return;
+		} else {
+			response.status(400).send({
+				error: "invalid_request"
+			});
+			return;
+		}
+	} catch (error) {
+		console.error(error);
+		response.status(500).send({
+			error: "server_error"
+		});
+		return;
+	}
+}
+
 chamado.prototype.post		= async (request, response) => {
 	request.body["cliente"]	= await rep_cli.getByCPF(response.locals.user);
 	controller.post(repository, request, response);
@@ -56,7 +98,7 @@ chamado.prototype.postResponsavel	= async (request, response) => {
 		let id	= request.params.id;
 		if (id) {
 			let data	= await repository.getById(id);
-			if (data && !data.responsavel) {
+			if (data && !data.responsavel.cpf) {
 				data["responsavel"]	= await rep_age.getById(response.locals.user);
 				response.status(200).send(await repository.update(id, data));
 				return;

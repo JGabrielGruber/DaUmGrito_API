@@ -10,6 +10,10 @@ router.get('/:id', auth.authenticate, controller.getById);
 
 router.get('/cliente/:cpf', auth.authenticate, controller.getByCPF);
 
+router.get('/responsavel/:cpf', auth.authenticate, controller.getByCPFAgente);
+
+router.get('/empresa/:cnpj', auth.authenticate, controller.getByCNPJ);
+
 router.post('/', 
 	(request, response, next) => {
 		auth.authenticate(request, response, next, "cliente");
