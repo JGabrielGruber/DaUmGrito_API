@@ -98,9 +98,13 @@ chamado.prototype.postResponsavel	= async (request, response) => {
 		let id	= request.params.id;
 		if (id) {
 			let data	= await repository.getById(id);
-			if (data && !data.responsavel.cpf) {
-				data["responsavel"]	= await rep_age.getById(response.locals.user);
-				data["status"]		= "Sob Atendimento";
+			if (data) {
+				if (data.responsavel.cpf && data.responsavel._id == response.locals.user) {
+					data["status"]		= "Concluido";
+				} else {
+					data["responsavel"]	= await rep_age.getById(response.locals.user);
+					data["status"]		= "Sob Atendimento";
+				}
 				response.status(200).send(await repository.update(id, data));
 				return;
 			} else {
