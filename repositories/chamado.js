@@ -8,7 +8,7 @@ class Chamado {
 	
 	constructor() {
 		this.base = new Base('Chamado')
-		this.projection = '_id cliente responsavel titulo descricao localizacao timestamp timeupdate'
+		this.projection = '_id cliente responsavel titulo descricao status localizacao timestamp timeupdate'
 	}
 
 	async getAll() {
