@@ -99,7 +99,7 @@ chamado.prototype.postResponsavel	= async (request, response) => {
 		if (id) {
 			let data	= await repository.getById(id);
 			if (data) {
-				if (data.responsavel.cpf && data.responsavel._id == response.locals.user) {
+				if (data.responsavel.cpf && (data.responsavel._id == response.locals.user)) {
 					data["status"]		= "Concluido";
 				} else {
 					data["responsavel"]	= await rep_age.getById(response.locals.user);
