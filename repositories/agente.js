@@ -30,8 +30,8 @@ class Agente {
 		return await this.base._model.find({}, this.projection);
 	}
 
-	async getById(id) {
-		return await this.base._model.findById(id);
+	async getById(id, projection=null) {
+		return (projection ? await this.base._model.findById(id, projection) : await this.base._model.findById(id));
 	}
 
 	async getByCPF(cpf) {

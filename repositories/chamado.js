@@ -16,7 +16,7 @@ class Chamado {
 	}
 
 	async getById(id) {
-		return await this.base._model.findById(id);
+		return await this.base._model.findById(id, "_id cliente responsavel titulo descricao status foto localizacao timestamp timeupdate");
 	}
 
 	async getByCPF(cpf) {
@@ -29,6 +29,10 @@ class Chamado {
 
 	async getByCPFAgente(cpf) {
 		return await this.base._model.find({ "responsavel.cpf": cpf }, this.projection);
+	}
+
+	async getResolucao(id) {
+		return await this.base._model.findById(id, "resolucao");
 	}
 
 	async create(data) {

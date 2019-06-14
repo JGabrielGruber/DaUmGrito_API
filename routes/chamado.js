@@ -44,4 +44,6 @@ router.put('/:id/status',
 		auth.authenticate(request, response, next, "agente");
 	}, controller.putStatus);
 
+router.post('/:id/mensagem', auth.authenticate, controller.postMensagem)
+
 module.exports	= router;

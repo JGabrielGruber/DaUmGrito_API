@@ -99,10 +99,11 @@ chamado.prototype.postResponsavel	= async (request, response) => {
 		if (id) {
 			let data	= await repository.getById(id);
 			if (data) {
-				if (data.responsavel.cpf && (data.responsavel._id == response.locals.user)) {
+				let agente	= await rep_age.getById(response.locals.user, '_id cpf nome contato.email_um funcao empresa.cnpj empresa.nome');
+				if (data.responsavel.cpf && (data.responsavel.cpf == agente.cpf)) {
 					data["status"]		= "Concluido";
 				} else {
-					data["responsavel"]	= await rep_age.getById(response.locals.user);
+					data["responsavel"]	= agente;
 					data["status"]		= "Sob Atendimento";
 				}
 				response.status(200).send(await repository.update(id, data));
@@ -188,5 +189,80 @@ chamado.prototype.putStatus			= async (request, response) => {
 	}
 }
 
+chamado.prototype.getResolucao		= async (request, response) => {
+	try {
+		let	id = request.params.id;
+		if (id) {
+			response.status(200).send(await repository.getResolucao(id));
+			return;
+		} else {
+			response.status(400).send({
+				error: "invalid_request"
+			});
+			return;
+		}
+	} catch (error) {
+		console.error(error);
+		response.status(500).send({
+			error: "server_error"
+		});
+		return;
+	}
+}
+
+chamado.prototype.postMensagem		= async (request, response) => {
+	try {
+		let id	= request.params.id;
+		if (id) {
+			let data	= await repository.getById(id);
+			if (data && request.body.conteudo) {
+				if (response.locals.level == "agente") {
+					if (data.responsavel.cpf == (await rep_age.getById(response.locals.user)).cpf) {
+						let mensagem	= {
+							autor:		data.responsavel.cpf,
+							remetente:	data.cliente.cpf,
+							level:		"agente",
+							conteudo:	request.body.conteudo,
+							timestamp:	new Date()
+						}
+						data["resolucoes"].push(mensagem);
+					}
+				} else if (response.locals.level == "cliente") {
+					if (data.cliente.cpf == response.locals.user) {
+						let mensagem	= {
+							autor:		data.cliente.cpf,
+							remetente:	data.responsavel.cpf,
+							level:		"cliente",
+							conteudo:	request.body.conteudo,
+							timestamp:	new Date()
+						}
+						data["resolucoes"].push(mensagem);
+					}
+				}
+				response.status(200).send((await repository.update(id, data)).resolucoes);
+				return;
+			} else {
+				response.status(400).send({
+					error: "invalid_request",
+					message: "É necessário que tenha uma mensagem e um chamado existente."
+				});
+				return;
+			}
+		} else {
+			response.status(400).send({
+				error: "invalid_request",
+				message: "É necessário que tenha o ID do chamado."
+			});
+			return;
+		}
+	} catch (error) {
+		console.error(error);
+		response.status(500).send({
+			error: "server_error",
+			message: "Estamos com problemas para acessar o servidor, tente novamente mais tarde."
+		});
+		return;
+	}
+}
 
 module.exports	= chamado;

@@ -20,9 +20,11 @@ const Chamado	= new mongoose.Schema({
 		}
 	},
 	responsavel:	{
+		_id:		{
+			string:		String
+		},
 		cpf:		{
-			type:		Number,
-			index:		true
+			type:		Number
 		},
 		nome:		{
 			type:		String
@@ -35,9 +37,6 @@ const Chamado	= new mongoose.Schema({
 				type:		String
 			}
 		},
-		foto: {
-			type: String
-		},
 		funcao: {
 			type:		String
 		},
@@ -48,11 +47,6 @@ const Chamado	= new mongoose.Schema({
 			},
 			nome:		{
 				type:		String
-			},
-			contato:	{
-				email_um:		{
-					type:		String
-				}
 			}
 		},
 		timestamp:	{
