@@ -31,8 +31,8 @@ class Chamado {
 		return await this.base._model.find({ "responsavel.cpf": cpf }, this.projection);
 	}
 
-	async getResolucao(id) {
-		return await this.base._model.findById(id, "resolucao");
+	async getResolucoes(id) {
+		return await this.base._model.findById(id, "resolucoes");
 	}
 
 	async create(data) {

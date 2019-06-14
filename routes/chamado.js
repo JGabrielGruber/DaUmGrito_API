@@ -44,7 +44,7 @@ router.put('/:id/status',
 		auth.authenticate(request, response, next, "agente");
 	}, controller.putStatus);
 
-router.post('/:id/resolucao', auth.authenticate, controller.getResolucao);
+router.get('/:id/resolucoes', auth.authenticate, controller.getResolucoes);
 
 router.post('/:id/mensagem', auth.authenticate, controller.postMensagem);
 

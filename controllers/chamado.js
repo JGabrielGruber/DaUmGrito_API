@@ -189,11 +189,11 @@ chamado.prototype.putStatus			= async (request, response) => {
 	}
 }
 
-chamado.prototype.getResolucao		= async (request, response) => {
+chamado.prototype.getResolucoes		= async (request, response) => {
 	try {
 		let	id = request.params.id;
 		if (id) {
-			response.status(200).send(await repository.getResolucao(id));
+			response.status(200).send(await repository.getResolucoes(id));
 			return;
 		} else {
 			response.status(400).send({
