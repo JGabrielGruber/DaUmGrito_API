@@ -26,7 +26,7 @@ $ source bin/activate
 ```
 4. Clone o repositório:
 ```
-$ git clone https://github.com/JGabrielGruber/DaUmGrito_AP.git
+$ git clone https://github.com/JGabrielGruber/DaUmGrito_API.git
 ```
 5. Entre no diretório do projeto:
 ```
