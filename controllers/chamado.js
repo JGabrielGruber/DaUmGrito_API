@@ -214,9 +214,10 @@ chamado.prototype.postMensagem		= async (request, response) => {
 	try {
 		let id	= request.params.id;
 		if (id) {
-			let data	= await repository.getById(id);
+			let data	= await repository.getByIdResolucoes(id, "");
 			if (data && request.body.conteudo) {
 				if (response.locals.level == "agente") {
+					
 					if (data.responsavel.cpf == (await rep_age.getById(response.locals.user)).cpf) {
 						let mensagem	= {
 							autor:		data.responsavel.cpf,
@@ -239,7 +240,7 @@ chamado.prototype.postMensagem		= async (request, response) => {
 						data["resolucoes"].push(mensagem);
 					}
 				}
-				response.status(200).send((await repository.update(id, data)).resolucoes);
+				response.status(200).send({ resolucoes: (await repository.update(id, { resolucoes: data["resolucoes"] })).resolucoes });
 				return;
 			} else {
 				response.status(400).send({
