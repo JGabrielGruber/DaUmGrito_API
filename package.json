@@ -11,7 +11,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.5.9",
+    "mongoose": "^5.7.5",
     "morgan": "~1.9.1"
   },
   "description": "API do projeto Dá Um Grito, feito como forma de avaliação para a UNC",
